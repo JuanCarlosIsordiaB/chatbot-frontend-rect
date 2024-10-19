@@ -3,7 +3,6 @@ import {
   GptMessage,
   MyMessage,
   TextMessageBox,
-  TextMessageBoxFile,
   TypingLoader,
 } from "../../components";
 
@@ -48,19 +47,11 @@ export const SpellingCheckerPage = () => {
           )}
         </div>
       </div>
-      {/* 
-      
+
       <TextMessageBox
         onSendMessage={handlePost}
         placeHolder=""
         disableCorrections
-      />
-      
-      */}
-      <TextMessageBoxFile
-        onSendMessage={handlePost}
-        placeHolder=""
-        
       />
     </div>
   );
