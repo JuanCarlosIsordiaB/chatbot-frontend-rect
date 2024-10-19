@@ -38,11 +38,22 @@ em {
 }
 
 .chat-container {
-  @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl  h-full p-4;
+  @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl  h-full p-4 ;
 }
 
 .chat-messages {
-  @apply flex flex-col h-full overflow-x-auto mb-4 overflow-scroll;
+  @apply flex flex-col h-full overflow-x-auto mb-4 overflow-scroll scrollbar-hidden;
+}
+
+
+/* Ocultar el scrollbar pero mantener el scroll funcional */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Para Chrome, Safari y Opera */
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;  /* Para IE y Edge */
+  scrollbar-width: none;  /* Para Firefox */
 }
 
 
