@@ -1,14 +1,21 @@
 import { useState } from "react";
 import {
   GptMessage,
+  GptSpellingMessage,
   MyMessage,
   TextMessageBox,
   TypingLoader,
 } from "../../components";
+import { spellingUseCase } from "../../../core/use-cases";
 
 interface Message {
   text: string;
   isGpt: boolean;
+  info?: {
+    userScore: number;
+    errors: string[];
+    message: string;
+  }
 }
 
 export const SpellingCheckerPage = () => {
@@ -20,7 +27,16 @@ export const SpellingCheckerPage = () => {
 
     setMessages([...messages, { text, isGpt: false }]);
 
-    //use case TODO
+    const { ok, errors, message, userScore } = await spellingUseCase(text);
+    if ( !ok ) {
+      setMessages( (prev) => [...prev, { text: 'No se pudo realizar la corrección', isGpt: true }] );
+    } else {
+      setMessages( (prev) => [...prev, { 
+        text: message, isGpt: true,  
+        info: {errors,message,userScore}
+      }]);
+    }
+    
     setIsLoading(false);
   };
 
@@ -34,7 +50,7 @@ export const SpellingCheckerPage = () => {
 
           {messages.map((message, index) => {
             if (message.isGpt) {
-              return <GptMessage key={index} text="Soy un bot" />;
+              return <GptSpellingMessage key={index} {...message.info!}/>;
             } else {
               return <MyMessage key={index} text={message.text} />;
             }
