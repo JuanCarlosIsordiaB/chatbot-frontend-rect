@@ -81,7 +81,7 @@ export const ProsConsStreamPage = () => {
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
           {/* Chat messages */}
-          <GptMessage text="Hola! Yo te puedo ayudar darte una comparacion entre dos cosas que me pidas...." />
+          <GptMessage text="# Hola! Yo te puedo ayudar darte una comparacion entre dos cosas que me pidas...." />
 
           {messages.map((message, index) => {
             if (message.isGpt) {

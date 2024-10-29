@@ -34,7 +34,7 @@ export const ProsConsPage = () => {
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
           {/* Chat messages */}
-          <GptMessage text="Te ayudare a escoger correctamnte" />
+          <GptMessage text="# Te ayudare a escoger correctamnte" />
 
           {messages.map((message, index) => {
             if (message.isGpt) {

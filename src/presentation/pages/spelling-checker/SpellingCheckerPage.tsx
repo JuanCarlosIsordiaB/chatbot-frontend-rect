@@ -45,8 +45,8 @@ export const SpellingCheckerPage = () => {
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
           {/* Chat messages */}
-          <GptMessage text="Cambiar texto a español" />
-          <MyMessage text="Change text to English" />
+          <GptMessage text="# Cambiar texto a diferentes idiomas" />
+          
 
           {messages.map((message, index) => {
             if (message.isGpt) {
