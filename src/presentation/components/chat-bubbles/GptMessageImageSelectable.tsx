@@ -12,22 +12,27 @@ export const GptMessageImageSelectable = ({ imageUrl, onImageSelected }: Props) 
   const originalImageRef = useRef<HTMLImageElement>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [coords, setCoords] = useState({x: 0, y:0});
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+
 
   useEffect(() => {
+
     const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
     const image = new Image();
-    image.crossOrigin = "Anonymous";
+    image.crossOrigin = 'Anonymous';
     image.src = imageUrl;
-    originalImageRef.current = image;
-    image.onload = () => {
-      ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
-    };
-  }, []);
 
-  
+    originalImageRef.current = image;
+
+    image.onload = () => {
+      ctx?.drawImage( image, 0, 0, canvas.width, canvas.height )
+    }
+
+  }, [imageUrl]);
+
+
   const onMouseDown = (
     event: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
@@ -47,7 +52,7 @@ export const GptMessageImageSelectable = ({ imageUrl, onImageSelected }: Props) 
     setIsDrawing(false);
     const canvas = canvasRef.current!;
     const url = canvas.toDataURL("image/png");
-    // console.log({ url });
+    // console.log( url );
     // https://jaredwinick.github.io/base64-image-viewer/
     onImageSelected && onImageSelected(url);
 
@@ -76,11 +81,11 @@ export const GptMessageImageSelectable = ({ imageUrl, onImageSelected }: Props) 
     ctx.drawImage(originalImageRef.current!, 0, 0, canvaWidth, canvaHeight);
 
     // Dibujar el rectangulo, pero en este caso, limpiaremos el espacio
-    //ctx. fillRect(coords.x, coords.y, width, height);
+    // ctx.fillRect(coords.x, coords.y, width, height);
     ctx.clearRect(coords.x, coords.y, width, height);
   };
 
-  const resetCanva = () => {
+  const resetCanvas = () => {
     const ctx = canvasRef.current!.getContext("2d")!;
     ctx.clearRect(0, 0, canvasRef.current!.width, canvasRef.current!.height);
     ctx.drawImage(
@@ -93,6 +98,7 @@ export const GptMessageImageSelectable = ({ imageUrl, onImageSelected }: Props) 
 
     onImageSelected && onImageSelected(imageUrl);
   };
+  
 
   return (
     <div className="col-start-1 col-end-13 p-3 ">
@@ -111,8 +117,16 @@ export const GptMessageImageSelectable = ({ imageUrl, onImageSelected }: Props) 
           </svg>
         </div>
         <div className="relative ml-3  bg-indigo-500 bg-opacity-35 pt-3 pb-2 px-4 shadow rounded-xl text-sm">
-          <canvas ref={canvasRef} width={600} height={600} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove} />
-          <button onClick={resetCanva} className="btn-primary mt-2">Clear Selection</button>
+        <canvas 
+              ref={ canvasRef }
+              width={ 600 }
+              height={ 600 }
+              onMouseDown={ onMouseDown }
+              onMouseUp={ onMouseUp }
+              onMouseMove={ onMouseMove }
+            />
+
+          <button  onClick={ resetCanvas } className="btn-primary mt-2">Clear Selection</button>
           {/*<img src={imageUrl} alt={alt} className="mt-2 rounded-xl w-96 h-96 object-cover" onClick={() => onImageSelected && onImageSelected(imageUrl)} /> */}
         </div>
       </div>

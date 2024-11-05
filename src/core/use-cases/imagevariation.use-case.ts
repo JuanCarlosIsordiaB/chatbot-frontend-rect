@@ -1,30 +1,39 @@
 type GeneratedImage = Image | null;
 
-
 interface Image {
-    url: string;
-    alt: string;
+  url: string;
+  alt: string;
 }
 
-export const imageVariationUseCase = async ( originalImage: string ): Promise<GeneratedImage> => {
+export const imageVariationUseCase = async (
+  originalImage: string,
+): Promise<GeneratedImage> => {
 
 
-    try {
-        const resp = await fetch(`${import.meta.env.VITE_GPT_API}/image-generation-variation`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ baseImage: originalImage })
-        });
+  try {
+    
+    const resp = await fetch(`${ import.meta.env.VITE_GPT_API }/image-generation-variation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({
+        baseImage: originalImage,
+      })
+    });
 
-        const {url, revised_prompt: alt} = await resp.json();
 
-        //console.log({url, alt});
+    const {url,revised_prompt: alt } = await resp.json();
 
-        return {url, alt };
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
+    return { url, alt };
+
+
+
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+
+
+
+};
