@@ -32,7 +32,7 @@ export const ImageGenerationPage = () => {
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
           {/* Chat messages */}
-          <GptMessage text="I can help you generating your images" />
+          <GptMessage text="# I can help you generating your images" />
           
 
           {messages.map((message, index) => {

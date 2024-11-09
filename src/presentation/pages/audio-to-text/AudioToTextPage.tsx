@@ -36,14 +36,14 @@ export const AudioToTextPage = () => {
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
           {/* Chat messages */}
-          <GptMessage text="# Te ayudare a pasar de audio a texto." />
+          <GptMessage text="# I will help you go from audio to text" />
           
 
           {messages.map((message, index) => {
             if (message.isGpt) {
               return <GptMessage key={index} text={message.text} />;
             } else {
-              return <MyMessage key={index} text='Convertir Audio a Texto' />;
+              return <MyMessage key={index} text='Convert Audio a Text' />;
             }
           })}
 
