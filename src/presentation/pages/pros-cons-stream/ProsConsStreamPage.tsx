@@ -50,37 +50,12 @@ export const ProsConsStreamPage = () => {
     }
 
     isRunning.current = false;
-
-    //Generar el ultimo mensaje
-    /*
-    const decoder = new TextDecoder();
-    let messageRecived = "";
-    setMessages((messages) => [
-      ...messages,
-      { text: messageRecived, isGpt: true },
-    ]);
-
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      const decodedChunk = decoder.decode(value, { stream: true });
-      messageRecived += decodedChunk;
-
-      setMessages((messages) => {
-        const newMessages = [...messages];
-        newMessages[newMessages.length - 1].text = messageRecived;
-        return newMessages;
-      });
-    }
-
-    */
   };
 
   return (
     <div className="chat-container">
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
-          {/* Chat messages */}
           <GptMessage text="# Hello! I can help you by comparing two options...." />
 
           {messages.map((message, index) => {

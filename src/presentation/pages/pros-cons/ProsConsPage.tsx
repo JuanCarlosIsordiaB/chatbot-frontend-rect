@@ -21,12 +21,10 @@ export const ProsConsPage = () => {
 
     setMessages((prev) => [...prev, { text, isGpt: false }]);
 
-    //use case TODO
-    const data= await prosConsUseCase(text);
+    const data = await prosConsUseCase(text);
     setIsLoading(false);
-   if(!data.ok) return ;
+    if (!data.ok) return;
     setMessages((prev) => [...prev, { text: data.content, isGpt: true }]);
-    
   };
 
   return (

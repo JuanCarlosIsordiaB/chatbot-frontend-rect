@@ -15,7 +15,7 @@ interface Message {
     userScore: number;
     errors: string[];
     message: string;
-  }
+  };
 }
 
 export const SpellingCheckerPage = () => {
@@ -28,15 +28,22 @@ export const SpellingCheckerPage = () => {
     setMessages([...messages, { text, isGpt: false }]);
 
     const { ok, errors, message, userScore } = await spellingUseCase(text);
-    if ( !ok ) {
-      setMessages( (prev) => [...prev, { text: 'No se pudo realizar la corrección', isGpt: true }] );
+    if (!ok) {
+      setMessages((prev) => [
+        ...prev,
+        { text: "No se pudo realizar la corrección", isGpt: true },
+      ]);
     } else {
-      setMessages( (prev) => [...prev, { 
-        text: message, isGpt: true,  
-        info: {errors,message,userScore}
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          text: message,
+          isGpt: true,
+          info: { errors, message, userScore },
+        },
+      ]);
     }
-    
+
     setIsLoading(false);
   };
 
@@ -44,13 +51,11 @@ export const SpellingCheckerPage = () => {
     <div className="chat-container">
       <div className="chat-messages">
         <div className="grid grid-cols-12 gap-y-2">
-          {/* Chat messages */}
           <GptMessage text="# Hello! I can help you with spelling problems" />
-          
 
           {messages.map((message, index) => {
             if (message.isGpt) {
-              return <GptSpellingMessage key={index} {...message.info!}/>;
+              return <GptSpellingMessage key={index} {...message.info!} />;
             } else {
               return <MyMessage key={index} text={message.text} />;
             }
